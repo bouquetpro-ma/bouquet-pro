@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bouquet Pro</title>
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0b1020"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Bouquet Pro">
+<style>
+:root{--bg:#0b1020;--card:#151c33;--card2:#1b2442;--txt:#eef1fb;--mut:#9aa6c8;--a:#7c5cff;--b:#22d3ee}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,"Segoe UI",Tahoma,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+.hero{padding:44px 20px 36px;text-align:center;background:radial-gradient(900px 400px at 80% -10%,#7c5cff55,transparent),radial-gradient(700px 400px at 10% 0,#22d3ee33,transparent)}
+.logo{display:inline-block;font-weight:800;font-size:15px;letter-spacing:.5px;padding:6px 14px;border-radius:99px;background:#ffffff14;border:1px solid #ffffff22;margin-bottom:16px}
+h1{font-size:28px;margin:0 0 10px;line-height:1.3}
+.hero p{color:var(--mut);margin:0 auto;max-width:520px}
+.badge{display:inline-flex;gap:6px;margin-top:18px;padding:8px 14px;border-radius:12px;background:#22c55e22;color:#7ee2a0;font-size:13px}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px 40px}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:16px 0;position:sticky;top:0;background:linear-gradient(var(--bg) 80%,transparent);z-index:2}
+.tab{white-space:nowrap;padding:9px 16px;border-radius:99px;background:var(--card);color:var(--mut);border:1px solid #ffffff14;font-size:14px;cursor:pointer;font-family:inherit}
+.tab.on{background:linear-gradient(135deg,var(--a),var(--b));color:#fff;border-color:transparent}
+.grid{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:700px){.grid{grid-template-columns:1fr 1fr}h1{font-size:38px}}
+.card{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid #ffffff12;border-radius:20px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.top{display:flex;align-items:center;gap:12px}
+.ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-weight:800;color:#fff;font-size:15px}
+.card h3{margin:0;font-size:18px}.tag{font-size:12px;color:var(--mut)}
+.price{font-size:22px;font-weight:800}.price small{font-size:12px;color:var(--mut);font-weight:400}
+ul{margin:0;padding:0 18px;color:var(--mut);font-size:14px}
+.btn{margin-top:auto;display:block;text-align:center;text-decoration:none;color:#fff;padding:12px;border-radius:14px;font-weight:700;background:linear-gradient(135deg,var(--a),var(--b))}
+.note{margin:24px 0;padding:14px 16px;border-radius:14px;background:#ffffff0d;color:var(--mut);font-size:13px}
+footer{text-align:center;color:var(--mut);font-size:12px;padding:20px 16px 40px}
+.lang{position:absolute;top:14px;left:14px;display:flex;gap:6px}.lang button{background:#ffffff14;color:var(--txt);border:1px solid #ffffff22;border-radius:10px;padding:5px 10px;font-size:12px;cursor:pointer}.lang button.on{background:var(--a)}.hero{position:relative}[dir=ltr] .tabs{direction:ltr}
+</style></head><body>
+<header class="hero"><div class="lang" id="lang"><button data-l="ar" class="on">ع</button><button data-l="fr">FR</button><button data-l="en">EN</button></div>
+<div class="logo">📺 Bouquet Pro</div>
+<h1 id="h1"></h1><p id="sub"></p><div class="badge" id="bdg"></div></header>
+<main class="wrap"><div class="tabs" id="tabs"></div><div class="grid" id="grid"></div><div class="note" id="note"></div></main>
+<footer id="foot"></footer>
+<script>
+const T={
+ar:{dir:"rtl",h1:"قارن عروض التلفزة والستريمينغ الرسمية في المغرب",sub:"كل العروض من شركات مرخصة. اختار اللي كيعجبك وسجل مباشرة عند الشركة.",bdg:"✔ عروض رسمية فقط، بلا قرصنة",tabs:{all:"الكل",tv:"قنوات تلفزية",vod:"أفلام ومسلسلات",sport:"رياضة"},btn:"شوف العرض الرسمي ←",note:"الأسعار إرشادية وكتتبدل. الثمن الحقيقي كتلقاه فالصفحة الرسمية ديال الشركة. هاد الموقع ما كيبيعش اشتراكات، كيوجهك للشركات الرسمية.",foot:"© Bouquet Pro، موقع مقارنة مستقل. العلامات التجارية ملك لأصحابها.",
+ p:{mt:["15 درهم","للأسبوع، Prestige 99 درهم/شهر",["قنوات لايف HD","شاشتين مسموحين","محتوى VOD"]],or:["حسب العرض","",["مرخصة من الهاكا (قرار 47-26)","كتخدم مع صندوق أورنج","قنوات وVOD"]],iw:["حسب العرض","",["باقة قنوات مرخصة","مسجلة عند الهاكا"]],sh:["من 19 درهم","للشهر (موبايل عبر أورنج)",["مسلسلات عربية وتركية","48.99 درهم/شهر عبر إنوي"]],os:["حسب الباقة","",["HBO وأفلام هوليوود","عبر اتصالات المغرب أو أورنج أو إنوي"]],nf:["شوف الصفحة الرسمية","",["الأسعار تزادت فشتنبر 2026"]],be:["شوف الصفحة الرسمية","",["الاشتراك عند الموزعين المعتمدين","أو فموقع beIN"]]}},
+fr:{dir:"ltr",h1:"Comparez les offres TV et streaming officielles au Maroc",sub:"Toutes les offres viennent de sociétés autorisées. Choisissez et abonnez-vous directement chez le fournisseur.",bdg:"✔ Offres officielles uniquement, zéro piratage",tabs:{all:"Tout",tv:"Chaînes TV",vod:"Films et séries",sport:"Sport"},btn:"Voir l'offre officielle →",note:"Prix indicatifs, susceptibles de changer. Le prix réel est sur la page officielle du fournisseur. Ce site ne vend aucun abonnement, il vous oriente vers les fournisseurs officiels.",foot:"© Bouquet Pro, site de comparaison indépendant. Les marques appartiennent à leurs propriétaires.",
+ p:{mt:["15 DH","par semaine, Prestige 99 DH/mois",["Chaînes live HD","2 écrans autorisés","Contenu VOD"]],or:["Selon l'offre","",["Autorisée par la HACA (décision 47-26)","Avec la box Orange","Chaînes et VOD"]],iw:["Selon l'offre","",["Bouquet de chaînes autorisé","Enregistré à la HACA"]],sh:["Dès 19 DH","par mois (mobile via Orange)",["Séries arabes et turques","48,99 DH/mois via inwi"]],os:["Selon le pack","",["HBO et films hollywoodiens","Via Maroc Telecom, Orange ou inwi"]],nf:["Voir la page officielle","",["Prix en hausse en sept. 2026"]],be:["Voir la page officielle","",["Abonnement chez les revendeurs agréés","Ou sur le site beIN"]]}},
+en:{dir:"ltr",h1:"Compare official TV and streaming offers in Morocco",sub:"Every offer comes from a licensed company. Pick one and subscribe directly with the provider.",bdg:"✔ Official offers only, no piracy",tabs:{all:"All",tv:"TV channels",vod:"Movies & series",sport:"Sport"},btn:"See official offer →",note:"Prices are indicative and may change. The real price is on the provider's official page. This site sells no subscriptions, it points you to official providers.",foot:"© Bouquet Pro, independent comparison site. Trademarks belong to their owners.",
+ p:{mt:["15 MAD","per week, Prestige 99 MAD/month",["Live HD channels","2 screens allowed","VOD content"]],or:["Varies","",["Authorised by HACA (decision 47-26)","Works with Orange box","Channels and VOD"]],iw:["Varies","",["Licensed channel bundle","Registered with HACA"]],sh:["From 19 MAD","per month (mobile via Orange)",["Arabic and Turkish series","48.99 MAD/month via inwi"]],os:["Varies by plan","",["HBO and Hollywood films","Via Maroc Telecom, Orange or inwi"]],nf:["See official page","",["Prices rose in Sept 2026"]],be:["See official page","",["Subscribe via authorised dealers","Or on the beIN site"]]}}};
+const D=[
+{t:"tv",k:"mt",n:"MT TV",s:{ar:"اتصالات المغرب",fr:"Maroc Telecom",en:"Maroc Telecom"},c:"#e11d48",i:"MT",h:"https://www.iam.ma/fr/web/iam-portal/mt-tv"},
+{t:"tv",k:"or",n:"Orange TV",s:{ar:"أورنج المغرب",fr:"Orange Maroc",en:"Orange Morocco"},c:"#f97316",i:"OR",h:"https://www.orange.ma/"},
+{t:"tv",k:"iw",n:"inwi Live",s:{ar:"إنوي",fr:"inwi",en:"inwi"},c:"#a855f7",i:"iw",h:"https://inwi.ma/fr/videomusic"},
+{t:"vod",k:"sh",n:"Shahid VIP",s:{ar:"MBC Shahid",fr:"MBC Shahid",en:"MBC Shahid"},c:"#16a34a",i:"Sh",h:"https://www.orange.ma/ar/Shahid"},
+{t:"vod",k:"os",n:"OSN+",s:{ar:"OSN",fr:"OSN",en:"OSN"},c:"#2563eb",i:"O+",h:"https://www.iam.ma/fr/w/osnplus"},
+{t:"vod",k:"nf",n:"Netflix",s:{ar:"Netflix",fr:"Netflix",en:"Netflix"},c:"#dc2626",i:"N",h:"https://www.netflix.com/ma/"},
+{t:"sport",k:"be",n:"beIN SPORTS",s:{ar:"beIN",fr:"beIN",en:"beIN"},c:"#7c3aed",i:"beIN",h:"https://www.bein.com/ar/"}];
+let L=(location.hash.slice(1)||localStorage.getItem('bp_l')||'ar'),F='all';
+function r(){const x=T[L];document.documentElement.lang=L;document.documentElement.dir=x.dir;
+h1.textContent=x.h1;sub.textContent=x.sub;bdg.textContent=x.bdg;note.textContent=x.note;foot.textContent=x.foot;
+tabs.innerHTML=Object.keys(x.tabs).map(k=>`<button class="tab${k==F?' on':''}" data-f="${k}">${x.tabs[k]}</button>`).join('');
+document.querySelectorAll('#lang button').forEach(b=>b.classList.toggle('on',b.dataset.l==L));
+grid.innerHTML=D.filter(d=>F=='all'||d.t==F).map(d=>{const p=x.p[d.k];return `<div class="card"><div class="top"><div class="ic" style="background:${d.c}">${d.i}</div><div><h3>${d.n}</h3><div class="tag">${d.s[L]}</div></div></div><div class="price">${p[0]} <small>${p[1]}</small></div><ul>${p[2].map(y=>'<li>'+y+'</li>').join('')}</ul><a class="btn" target="_blank" rel="noopener" href="${d.h}">${x.btn}</a></div>`}).join('')}
+tabs.onclick=e=>{const b=e.target.closest('.tab');if(b){F=b.dataset.f;r()}};
+lang.onclick=e=>{const b=e.target.closest('button');if(b){L=b.dataset.l;localStorage.setItem('bp_l',L);r()}};r();
+if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+</script></body></html>
